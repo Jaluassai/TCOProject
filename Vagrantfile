@@ -2,6 +2,13 @@ Vagrant.configure(2) do |config|
     config.vm.box = 'ubuntu/focal64'
 
     # Configuration of Web Servers
+    config.vm.define "Web_Srv-1" do |web_srv1|
+        web_srv1.vm.hostname = "web_srv1"
+        web_srv1.vm.network "private_network", ip: "192.168.100.101"
+        web_srv1.vm.provider "virtualbox" do |vb|
+            vb.memory = 512
+        end
+    end
 
 
 
