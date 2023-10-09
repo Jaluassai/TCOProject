@@ -8,6 +8,10 @@ Vagrant.configure(2) do |config|
         web_srv1.vm.provider "virtualbox" do |vb|
             vb.memory = 512
         end
+        web_srv1.vm.provision "shell", inline: <<-SHELL
+        apt update -y
+        apt install nginx -y
+        SHELL
     end
 
     config.vm.define "Web_Srv-2" do |web_srv2|
@@ -16,6 +20,10 @@ Vagrant.configure(2) do |config|
         web_srv1.vm.provider "virtualbox" do |vb|
             vb.memory = 512
         end
+        web_srv2.vm.provision "shell", inline: <<-SHELL
+        apt update -y
+        apt install nginx -y
+        SHELL
     end
     
     
@@ -27,6 +35,10 @@ Vagrant.configure(2) do |config|
         loadbalancer.vm.provider "virtualbox" do |vb|
             vb.memory = 512
         end
+        loadbalancer.vm.provision "shell", inline: <<-SHELL
+        apt update -y
+        apt install nginx -y
+        SHELL
     end
 
 end
