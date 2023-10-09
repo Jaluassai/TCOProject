@@ -17,6 +17,8 @@ Vagrant.configure(2) do |config|
             vb.memory = 512
         end
     end
+    
+    
     # Configuration of Load Balancer
     config.vm.define "load-balancer" do |loadbalancer|
         loadbalancer.vm.hostname = "load-balancer"
