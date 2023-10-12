@@ -1,0 +1,32 @@
+global_defs {
+  # Keepalived process identifier
+  router_id nginx
+}
+
+# Script to check whether Nginx is running or not
+vrrp_script check_nginx {
+  script "/bin/check_nginx.sh"
+  interval 2
+  weight 50
+}
+
+# Virtual interface - The priority specifies the order in which the assigned interface to take over in a failover
+vrrp_instance VI_01 {
+  state MASTER
+  interface enp0s8
+  virtual_router_id 151
+  priority 110
+  unicast_src_ip 192.168.200.100
+  unicast_peer {
+        192.168.200.99
+  }
+
+  # The virtual ip address shared between the two NGINX Web Server which will float
+  virtual_ipaddress {
+    192.168.200.200/24
+  }
+  advert_int 1
+  track_script {
+    check_nginx
+  }
+}
