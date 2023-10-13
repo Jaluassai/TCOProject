@@ -8,18 +8,16 @@ Vagrant.configure(2) do |config|
         web_srv1.vm.provider "virtualbox" do |vb|
             vb.memory = 512
         end
-        web_srv1.vm.provision "shell", inline: <<-SHELL
-        apt update -y
-        apt install nginx -y
-        
-        SHELL
-
+        web_srv1.vm.provision "shell", path: "sh/nginx.sh"
         web_srv1.vm.provision "shell", path: "sh/web.sh"
         web_srv1.vm.provision "shell", path: "sh/cert.sh"
+        web_srv1.vm.provision "shell", path: "sh/siteConf.sh"
         web_srv1.vm.provision "shell", inline: <<-SHELL
-   #     sudo mkcert -key-file /vagrant/key.pem -cert-file /vagrant/cert.pem 192.168.200.200 192.168.200.99 192.168.200.100 192.168.200.101 192.168.200.102 backend
-   #todoso 
-   systemctl restart nginx
+        sudo mkcert -key-file /vagrant/key.pem -cert-file /vagrant/cert.pem 192.168.200.200 192.168.200.99 192.168.200.100 192.168.200.101 192.168.200.102 backend
+        #^^ Cert for Sites
+        sudo mkcert -pkcs12 192.168.200.100 backend 192.168.200.101 192.168.200.102 192.168.200.99 192.168.200.200
+        #^^ Cert for Host (Windows), to allow SSL
+        systemctl restart nginx
         SHELL
 
         
@@ -31,12 +29,10 @@ Vagrant.configure(2) do |config|
         web_srv2.vm.provider "virtualbox" do |vb|
             vb.memory = 512
         end
-        web_srv2.vm.provision "shell", inline: <<-SHELL
-        apt update -y
-        apt install nginx -y
-        SHELL
+        web_srv2.vm.provision "shell", path: "sh/nginx.sh"
         web_srv2.vm.provision "shell", path: "sh/web.sh"
         web_srv2.vm.provision "shell", path: "sh/cert.sh"
+        web_srv2.vm.provision "shell", path: "sh/siteConf.sh"
         web_srv2.vm.provision "shell", inline: <<-SHELL
         systemctl restart nginx
         SHELL
@@ -52,11 +48,7 @@ Vagrant.configure(2) do |config|
             vb.memory = 512
         end
 
-        loadbalancer.vm.provision "shell", inline: <<-SHELL
-        apt update -y
-        apt install nginx -y
-        SHELL
-    
+        loadbalancer.vm.provision "shell", path: "sh/nginx.sh"    
         loadbalancer.vm.provision "shell", path: "sh/loadbalancer.sh"
         loadbalancer.vm.provision "shell", path: "sh/cert.sh"
         loadbalancer.vm.provision "shell", path: "sh/keep.sh"
@@ -71,15 +63,10 @@ Vagrant.configure(2) do |config|
             vb.memory = 512
         end
 
-        loadbalancer2.vm.provision "shell", inline: <<-SHELL
-        apt update -y
-        apt install nginx -y
-        SHELL
-    
+        loadbalancer2.vm.provision "shell", path: "sh/nginx.sh"
         loadbalancer2.vm.provision "shell", path: "sh/loadbalancer.sh"
         loadbalancer2.vm.provision "shell", path: "sh/cert.sh"
         loadbalancer2.vm.provision "shell", path: "sh/keep.sh"
     end
-
 
 end

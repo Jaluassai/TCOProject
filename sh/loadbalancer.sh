@@ -8,3 +8,5 @@ cp /vagrant/cfg/loadbalancer.conf /etc/nginx/conf.d/
 cp /vagrant/cfg/nginx.conf /etc/nginx/
 
 systemctl restart nginx
+
+echo "LoadBalancer has been configured"

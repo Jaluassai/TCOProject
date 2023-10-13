@@ -15,3 +15,8 @@ fi
 
 
 sudo chmod 755 /bin/check_nginx.sh
+
+sudo systemctl restart nginx
+sudo systemctl restart keepalived
+
+echo "Keepalived has been installed and configured!"
