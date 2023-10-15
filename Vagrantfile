@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
         web_srv1.vm.provision "shell", inline: <<-SHELL
         sudo mkcert -key-file /vagrant/key.pem -cert-file /vagrant/cert.pem 192.168.200.200 192.168.200.99 192.168.200.100 192.168.200.101 192.168.200.102 backend
         #^^ Cert for Sites
-        sudo mkcert -pkcs12 192.168.200.100 192.168.200.101 192.168.200.102 192.168.200.99 192.168.200.200 backend
+        sudo mkcert -pkcs12 -p12-file /vagrant/certForHost.p12 192.168.200.100 192.168.200.101 192.168.200.102 192.168.200.99 192.168.200.200 backend
         #^^ Cert for Host (Windows), to allow SSL
         systemctl restart nginx
         SHELL
