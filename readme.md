@@ -1,9 +1,8 @@
 # Vagrant Multi-Node Web Environment
 
+> A Vagrant-based web environment with Load Balancing and High Availability for academic purposes.
+
 ![Project Image](others/arch.png)
-
-> A Vagrant-based web environment with load balancing and high availability for academic purposes.
-
 ---
 
 ## Table of Contents
@@ -18,13 +17,15 @@
 
 ## Description
 
-This project was developed for an academic course with the aim of creating a ready-to-use environment based on Vagrant, nginx, Load Balancing, and High Availability.
+This project was developed for an academic course with the aim of creating a ready-to-use environment based on Vagrant with Nginx, Load Balancing, and High Availability.
 Vagrantfile creates 4 servers:
-* Load Balancer 1
-* Load Balancer 2
-* Web Server 1
-* Web Server 2
-and Virtual router
+
+* Load Balancer 1 (192.168.200.100)
+* Load Balancer 2 (192.168.200.99)
+* Web Server 1 (192.168.200.101)
+* Web Server 2 (192.168.200.102)
+
+and Virtual router (192.168.200.200)
 
 ---
 
@@ -33,6 +34,7 @@ and Virtual router
 - Automatic provisioning of a multi-node web environment
 - Load balancing for distributing traffic
 - High availability setup using Keepalived
+- Self signed SSL certs using mkcert
 
 ---
 
