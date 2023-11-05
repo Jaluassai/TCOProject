@@ -20,12 +20,20 @@
 This project was developed for an academic course with the aim of creating a ready-to-use environment based on Vagrant with Nginx, Load Balancing, and High Availability.
 Vagrantfile creates 4 servers:
 
-* Load Balancer 1 (192.168.200.100)
-* Load Balancer 2 (192.168.200.99)
-* Web Server 1 (192.168.200.101)
-* Web Server 2 (192.168.200.102)
+* Load Balancer 1 (`192.168.200.100`)
+* Load Balancer 2 (`192.168.200.99`)
+* Web Server 1 (`192.168.200.101`)
+* Web Server 2 (`192.168.200.102`)
 
 and Virtual router (192.168.200.200)
+
+
+How thats work?
+Basically you as a User enter in your's browser `192.168.200.200`
+then Virtual Router who every sencond ask about state of Load Balancers point you to one of them (so your're on `192.168.200.100` or `192.168.200.99`)
+Then Load Balnacers point you to Web Server where we got our website - and also here we have 2 servers, so based on load on those servers (so you're on `192.168.200.101` or `192.168.200.102`)
+
+
 
 ---
 
